@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Vending machine
+		</title>
+
+		<script>
+		function generateDB(clicked_id) {
+			// Accessing the button element
+			// by using id attribute
+			//var doc = document.getElementById("btn");
+			if(clicked_id == 'generate') {
+				window.open("it.php?generate=true","_self");
+			} else if(clicked_id == 'show') {
+				window.open("it.php?generate=false","_self");
+			} else if(clicked_id == 'pay') {
+				var amount = parseInt(document.getElementById("amount").value, 10);
+				var paid = parseInt(document.getElementById("paid").value, 10);
+				//amount = amount.replace(",", ".");
+				//paid = paid.replace(",", ".");
+				//document.getElementById("amount").value = amount;
+				//document.getElementById("paid").value = paid;
+
+				//alert(typeof(paid) + typeof(amount));
+				if(!isNaN(amount) && !isNaN(paid) ) {
+					if(amount > paid) {
+						alert("Amount can't be smaller than paid value!");
+						return;
+					}
+				} else {
+					alert("Amount and paid value must be numbers!");
+					return;
+				}
+
+				window.open("it.php?generate=false&amount="+amount+"&paid="+paid,"_self");
+			}
+			// Changing the text content
+			//doc.textContent = "Click me!";
+		}
+		</script>
+	</head>
+
+	<body style = "text-align: center;">
+
+		<h1 style = "color:green;">
+			Vending machine
+		</h1>
+
+		<h2>
+			Generate the vending machine table, show the content or pay and receive the change.
+		</h2>
+
+
+		<table style="border:1px solid black;margin-left:auto;margin-right:auto;">
+		<tr>
+			<td>Amount</td>
+			<td><input type="text" id="amount" name="fname"></td>
+		</tr>
+		<tr>
+			<td><br></td>
+		</tr>
+		<tr>
+			<td>Paid</td>
+			<td><input type="text" id="paid" name="fname"></td>
+		</tr>
+		</table>
+		<br>
+		<button type = "button" id = "generate"
+			onclick = "generateDB(this.id)">
+			Generate vending table
+		</button>
+		<button type = "button" id = "show"
+			onclick = "generateDB(this.id)">
+			Show table
+		</button>
+		<button type = "button" id = "pay"
+			onclick = "generateDB(this.id)">
+			Pay and receive change
+		</button>
+	</body>
+</html>
